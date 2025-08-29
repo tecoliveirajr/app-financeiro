@@ -1,0 +1,244 @@
+/* Importa uma fonte mais bonita do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap' );
+
+/* Define nossas cores principais para fácil reutilização */
+:root {
+    --cor-primaria: #4a90e2;
+    --cor-secundaria: #50e3c2;
+    --cor-sucesso: #7ed321;
+    --cor-fundo: #f4f7f6;
+    --cor-texto: #333;
+    --cor-branca: #ffffff;
+}
+
+/* Estilos gerais para o corpo da página */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    margin: 0;
+    padding-top: 120px; /* Espaço para o cabeçalho e rodapé fixos */
+    padding-bottom: 80px;
+}
+
+/* --- ESTRUTURA E NAVEGAÇÃO --- */
+header, footer nav {
+    position: fixed; /* Deixa o cabeçalho e rodapé fixos na tela */
+    left: 0;
+    width: 100%;
+    background-color: var(--cor-primaria);
+    color: var(--cor-branca);
+    z-index: 100; /* Garante que fiquem por cima de outros elementos */
+}
+header { top: 0; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+footer nav { bottom: 0; display: flex; }
+
+/* Esconde todas as telas por padrão */
+.tela { display: none; padding: 15px; }
+/* Mostra apenas a tela que tiver a classe "ativa" */
+.tela.ativa { display: block; animation: fadeIn 0.4s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- CABEÇALHO E SALDOS --- */
+header h1 { font-size: 1.5em; text-align: center; margin: 0 0 10px 0; }
+.saldos-container { display: flex; justify-content: space-around; text-align: center; }
+.saldo-box h2 { font-size: 0.9em; margin: 0; font-weight: 400; }
+.saldo-box p { font-size: 1.2em; margin: 5px 0 0 0; font-weight: 700; }
+.progress-bar-container { background-color: rgba(255,255,255,0.3); border-radius: 10px; height: 10px; overflow: hidden; }
+.progress-bar { background-color: var(--cor-secundaria); height: 100%; width: 0%; transition: width 0.5s; }
+
+/* --- LISTA DE LANÇAMENTOS --- */
+#lista-lancamentos { display: flex; flex-direction: column; gap: 10px; }
+.lancamento-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-branca);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.lancamento-item strong { font-weight: 600; }
+.lancamento-item span { font-weight: 700; color: var(--cor-sucesso); }
+.lancamento-item.negativo span { color: #e74c3c; }
+
+/* --- RODAPÉ E BOTÕES DE NAVEGAÇÃO --- */
+.nav-button {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.nav-button i { font-size: 1.5em; display: block; margin-bottom: 5px; }
+.nav-button.ativo { color: var(--cor-branca); }
+
+/* --- BOTÃO FLUTUANTE (FAB) --- */
+.fab {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branca);
+    font-size: 2em;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 101;
+}
+
+/* --- JANELA MODAL (POP-UP) --- */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none; /* Começa escondido */
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+.modal-container.visivel { display: flex; }
+.modal-content {
+    background-color: var(--cor-branca);
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+.modal-content h2 { text-align: center; margin-top: 0; }
+#form-tarefa label { display: block; margin-bottom: 5px; font-weight: 600; }
+#form-tarefa select, #form-tarefa textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.modal-botoes { display: flex; justify-content: space-between; gap: 10px; }
+.btn-principal, .btn-secundario {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+.btn-principal { background-color: var(--cor-primaria); color: var(--cor-branca); }
+.btn-secundario { background-color: #eee; color: #333; }
+
+/* --- GRÁFICO --- */
+.grafico-container {
+    background-color: var(--cor-branca);
+    padding: 15px;
+    border-radius: 8px;
+
+    height: 350px;
+
+    max-width: 500px;
+    margin: 0 auto;
+}
+/* ================================================== */
+/*          ESTILOS DO MODO ADMINISTRADOR             */
+/* ================================================== */
+
+/* Ícone de Gatilho do Admin */
+#admin-trigger {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    z-index: 101;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+}
+#admin-trigger:hover {
+    color: var(--cor-branca);
+     transform: scale(1.1);
+}
+
+/* Mensagem de erro no login */
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    min-height: 20px;
+}
+
+/* Estilos específicos para o painel do admin */
+.admin-panel {
+    max-height: 90vh; /* Limita a altura do painel */
+    overflow-y: auto; /* Adiciona barra de rolagem se o conteúdo for grande */
+}
+.admin-section {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+.admin-section h3 {
+    margin-top: 0;
+}
+
+/* Botão de fechar o modal */
+.btn-fechar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #aaa;
+}
+
+/* Estilos para a lista de tarefas no painel admin */
+#lista-tarefas-admin .tarefa-item-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+#lista-tarefas-admin .tarefa-info {
+    flex-grow: 1;
+}
+#lista-tarefas-admin .tarefa-botoes button {
+    margin-left: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+.btn-editar-tarefa { color: var(--cor-primaria); }
+.btn-excluir-tarefa { color: #e74c3c; }
+/* style.css */
+
+/* Estilos para o seletor de período do relatório PDF */
+.date-range-picker {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.date-range-picker > div {
+    flex-grow: 1;
+}
+.date-range-picker label {
+    display: block;
+    margin-bottom: 5px;
+}
+.date-range-picker input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

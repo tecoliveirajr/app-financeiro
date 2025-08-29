@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head><link rel="stylesheet" href="style.css">
+<body>
+    
+</body><!-- CABEÇALHO PRINCIPAL COM SALDOS -->
+<header>
+    <h1>Missão Conquista</h1>
+    <div class="saldos-container">
+        <div class="saldo-box">
+            <h2>Meu Saldo</h2>
+            <p id="saldo-total">R$ 0,00</p>
+        </div>
+        <div class="saldo-box">
+            <h2>Meta Atual</h2>
+            <p id="meta-atual-nome">Nenhuma</p>
+            <div class="progress-bar-container">
+                <div id="meta-progress" class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- SEÇÃO PRINCIPAL QUE MUDA DE CONTEÚDO -->
+<main>
+    <!-- TELA 1: LANÇAMENTOS (INICIAL) -->
+    <section id="tela-lancamentos" class="tela ativa">
+        <h2>Minhas Missões Recentes</h2>
+        <div id="lista-lancamentos">
+            <!-- Os lançamentos aparecerão aqui -->
+        </div>
+    </section>
+
+    <!-- TELA 2: DASHBOARD -->
+    <section id="tela-dashboard" class="tela">
+        <h2>Meu Desempenho</h2>
+        <div class="grafico-container">
+            <canvas id="grafico-categorias"></canvas>
+        </div>
+    </section>
+</main>
+
+<!-- NAVEGAÇÃO INFERIOR -->
+<footer>
+    <nav>
+        <button data-tela="lancamentos" class="nav-button ativo"><i class="fas fa-list-check"></i> <span>Missões</span></button>
+        <button data-tela="dashboard" class="nav-button"><i class="fas fa-chart-pie"></i> <span>Desempenho</span></button>
+    </nav>
+</footer>
+
+<!-- BOTÃO FLUTUANTE PARA ADICIONAR TAREFA -->
+<button id="btn-adicionar-flutuante" class="fab" title="Registrar Missão">+</button>
+
+<!-- JANELA MODAL (POP-UP) PARA ADICIONAR TAREFA -->
+<div id="modal-adicionar" class="modal-container">
+    <div class="modal-content">
+        <h2>Registrar Nova Missão</h2>
+        <form id="form-tarefa">
+            <label for="select-tarefa">Qual missão você cumpriu?</label>
+            <select id="select-tarefa" required></select>
+            
+            <label for="obs-tarefa">Alguma observação?</label>
+            <textarea id="obs-tarefa" placeholder="Ex: Fiz com muito capricho!"></textarea>
+            
+            <div class="modal-botoes">
+                <button type="submit" class="btn-principal">Missão Cumprida!</button>
+                <button type="button" id="btn-cancelar" class="btn-secundario">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- LINHAS IMPORTANTES QUE CONECTAM NOSSOS ARQUIVOS -->
+<!-- 1. Biblioteca de Gráficos (Chart.js) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- 2. Biblioteca de Ícones (Font Awesome ) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- 3. Nosso Cérebro (app.js ) - TEM QUE SER A ÚLTIMA LINHA! -->
+ <script src="app.js"></script>
+ <!-- ================================================== -->
+<!--       SEÇÃO DO MODO ADMINISTRADOR (ESCONDIDA )      -->
+<!-- ================================================== -->
+
+<!-- Ícone de Gatilho para o Login do Admin -->
+<div id="admin-trigger" title="Acesso do Administrador">
+    <i class="fas fa-user-shield"></i>
+</div>
+
+<!-- Modal de Login do Admin -->
+<div id="modal-admin-login" class="modal-container">
+    <div class="modal-content">
+        <h2>Acesso Restrito</h2>
+        <form id="form-admin-login">
+            <label for="admin-password">Senha:</label>
+            <input type="password" id="admin-password" required>
+            <p id="admin-login-error" class="error-message"></p>
+            <div class="modal-botoes">
+                <button type="submit" class="btn-principal">Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Painel Principal do Administrador -->
+<div id="painel-admin" class="modal-container">
+    <div class="modal-content admin-panel">
+        <button id="btn-fechar-admin" class="btn-fechar-modal">&times;</button>
+        <h2>Painel do Administrador</h2>
+
+        <!-- Seção de Ajuste Manual de Pontos -->
+        <div class="admin-section">
+            <h3>Ajuste Manual de Pontos</h3>
+            <form id="form-ajuste-pontos">
+                <input type="number" id="ajuste-pontos-valor" placeholder="Pontos (ex: -10 ou 20)" required>
+                <input type="text" id="ajuste-pontos-motivo" placeholder="Motivo (ex: Penalidade)" required>
+                <button type="submit" class="btn-principal">Adicionar Ajuste</button>
+            </form>
+        </div>
+
+        <div class="admin-section">
+    <h3>Gerar Relatório PDF</h3>
+    <form id="form-relatorio-pdf">
+        <div class="date-range-picker">
+            <div>
+                <label for="pdf-data-inicio">Data de Início:</label>
+                <input type="date" id="pdf-data-inicio" required>
+            </div>
+            <div>
+                <label for="pdf-data-fim">Data de Fim:</label>
+                <input type="date" id="pdf-data-fim" required>
+            </div>
+        </div>
+        <button type="submit" class="btn-principal">Gerar e Baixar PDF</button>
+    </form>
+</div>
+
+        <!-- Seção de Gerenciamento de Tarefas -->
+        <div class="admin-section">
+            <h3>Gerenciar Missões</h3>
+            <div id="lista-tarefas-admin">
+                <!-- A lista de tarefas para edição será inserida aqui -->
+            </div>
+            <button id="btn-abrir-modal-nova-tarefa" class="btn-secundario">Adicionar Nova Missão</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Adicionar/Editar Tarefa -->
+<div id="modal-tarefa-editor" class="modal-container">
+    <div class="modal-content">
+        <h2 id="editor-tarefa-titulo">Editar Missão</h2>
+        <form id="form-tarefa-editor">
+            <input type="hidden" id="editor-tarefa-id">
+            <label for="editor-tarefa-nome">Nome:</label>
+            <input type="text" id="editor-tarefa-nome" required>
+            
+            <label for="editor-tarefa-categoria">Categoria:</label>
+            <input type="text" id="editor-tarefa-categoria" required>
+            
+            <label for="editor-tarefa-pontos">Pontos:</label>
+            <input type="number" id="editor-tarefa-pontos" required>
+            
+            <div class="modal-botoes">
+                <button type="submit" class="btn-principal">Salvar Missão</button>
+                <button type="button" id="btn-cancelar-editor" class="btn-secundario">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="app.js"></script>
+
+</html>

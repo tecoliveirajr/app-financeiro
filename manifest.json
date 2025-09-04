@@ -1,0 +1,16 @@
+{
+    "name": "Mesada Inteligente",
+    "short_name": "Mesada",
+    "description": "Aplicativo de educação financeira e tarefas.",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f4f7f6",
+    "theme_color": "#4a90e2",
+    "icons": [
+        {
+            "src": "icon-512.png.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

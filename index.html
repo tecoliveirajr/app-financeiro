@@ -1,179 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head><link rel="stylesheet" href="style.css">
-<body>
+    <title>Mesada Inteligente</title>
     
-</body><!-- CABEÇALHO PRINCIPAL COM SALDOS -->
-<header>
-    <h1>Missão Conquista</h1>
-    <div class="saldos-container">
-        <div class="saldo-box">
-            <h2>Meu Saldo</h2>
-            <p id="saldo-total">R$ 0,00</p>
-        </div>
-        <div class="saldo-box">
-            <h2>Meta Atual</h2>
-            <p id="meta-atual-nome">Nenhuma</p>
-            <div class="progress-bar-container">
-                <div id="meta-progress" class="progress-bar"></div>
+    <!-- LINHA CORRIGIDA E VALIDADA -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- CDN PÚBLICA E CONFIÁVEL PARA ÍCONES (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- O corpo do HTML permanece o mesmo -->
+    <!-- CABEÇALHO PRINCIPAL -->
+    <header>
+        <div class="header-content">
+            <div class="titulo-app">
+                <i class="fa-solid fa-piggy-bank"></i>
+                <h1>Painel de Tarefas</h1>
+            </div>
+            <div class="saldo-box">
+                <span>Meu Saldo</span>
+                <strong id="saldo-total">0 Pontos</strong>
             </div>
         </div>
-    </div>
-</header>
+        <i id="admin-trigger" class="fa-solid fa-user-shield" title="Painel do Administrador"></i>
+    </header>
 
-<!-- SEÇÃO PRINCIPAL QUE MUDA DE CONTEÚDO -->
-<main>
-    <!-- TELA 1: LANÇAMENTOS (INICIAL) -->
-    <section id="tela-lancamentos" class="tela ativa">
-        <h2>Minhas Missões Recentes</h2>
-        <div id="lista-lancamentos">
-            <!-- Os lançamentos aparecerão aqui -->
-        </div>
-    </section>
+    <!-- CONTEÚDO PRINCIPAL (TELAS ) -->
+    <main>
+        <section id="tela-lancamentos" class="tela ativa">
+            <h2>Minhas Tarefas Recentes</h2>
+            <ul id="lista-lancamentos"></ul>
+        </section>
 
-    <!-- TELA 2: DASHBOARD -->
-    <section id="tela-dashboard" class="tela">
-        <h2>Meu Desempenho</h2>
-        <div class="grafico-container">
-            <canvas id="grafico-categorias"></canvas>
-        </div>
-    </section>
-</main>
-
-<!-- NAVEGAÇÃO INFERIOR -->
-<footer>
-    <nav>
-        <button data-tela="lancamentos" class="nav-button ativo"><i class="fas fa-list-check"></i> <span>Missões</span></button>
-        <button data-tela="dashboard" class="nav-button"><i class="fas fa-chart-pie"></i> <span>Desempenho</span></button>
-    </nav>
-</footer>
-
-<!-- BOTÃO FLUTUANTE PARA ADICIONAR TAREFA -->
-<button id="btn-adicionar-flutuante" class="fab" title="Registrar Missão">+</button>
-
-<!-- JANELA MODAL (POP-UP) PARA ADICIONAR TAREFA -->
-<div id="modal-adicionar" class="modal-container">
-    <div class="modal-content">
-        <h2>Registrar Nova Missão</h2>
-        <form id="form-tarefa">
-            <label for="select-tarefa">Qual missão você cumpriu?</label>
-            <select id="select-tarefa" required></select>
-            
-            <label for="obs-tarefa">Alguma observação?</label>
-            <textarea id="obs-tarefa" placeholder="Ex: Fiz com muito capricho!"></textarea>
-            
-            <div class="modal-botoes">
-                <button type="submit" class="btn-principal">Missão Cumprida!</button>
-                <button type="button" id="btn-cancelar" class="btn-secundario">Cancelar</button>
+        <section id="tela-dashboard" class="tela">
+            <h2>Meu Desempenho</h2>
+            <div class="grafico-container">
+                <canvas id="grafico-categorias"></canvas>
             </div>
-        </form>
-    </div>
-</div>
+        </section>
+    </main>
 
-<!-- LINHAS IMPORTANTES QUE CONECTAM NOSSOS ARQUIVOS -->
-<!-- 1. Biblioteca de Gráficos (Chart.js) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<!-- 2. Biblioteca de Ícones (Font Awesome ) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- RODAPÉ DE NAVEGAÇÃO -->
+    <footer>
+        <nav>
+            <button data-tela="lancamentos" class="nav-button ativo"><i class="fa-solid fa-list-check"></i> <span>Tarefas</span></button>
+            <button data-tela="dashboard" class="nav-button"><i class="fa-solid fa-chart-pie"></i> <span>Desempenho</span></button>
+        </nav>
+    </footer>
 
-<!-- 3. Nosso Cérebro (app.js ) - TEM QUE SER A ÚLTIMA LINHA! -->
- <script src="app.js"></script>
- <!-- ================================================== -->
-<!--       SEÇÃO DO MODO ADMINISTRADOR (ESCONDIDA )      -->
-<!-- ================================================== -->
+    <!-- BOTÃO FLUTUANTE PARA ADICIONAR TAREFA -->
+    <button id="btn-adicionar-flutuante" class="fab" title="Registrar Tarefa">+</button>
 
-<!-- Ícone de Gatilho para o Login do Admin -->
-<div id="admin-trigger" title="Acesso do Administrador">
-    <i class="fas fa-user-shield"></i>
-</div>
+    <!-- =================================== -->
+    <!--      MODAIS DO APLICATIVO           -->
+    <!-- =================================== -->
 
-<!-- Modal de Login do Admin -->
-<div id="modal-admin-login" class="modal-container">
-    <div class="modal-content">
-        <h2>Acesso Restrito</h2>
-        <form id="form-admin-login">
-            <label for="admin-password">Senha:</label>
-            <input type="password" id="admin-password" required>
-            <p id="admin-login-error" class="error-message"></p>
-            <div class="modal-botoes">
-                <button type="submit" class="btn-principal">Entrar</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Painel Principal do Administrador -->
-<div id="painel-admin" class="modal-container">
-    <div class="modal-content admin-panel">
-        <button id="btn-fechar-admin" class="btn-fechar-modal">&times;</button>
-        <h2>Painel do Administrador</h2>
-
-        <!-- Seção de Ajuste Manual de Pontos -->
-        <div class="admin-section">
-            <h3>Ajuste Manual de Pontos</h3>
-            <form id="form-ajuste-pontos">
-                <input type="number" id="ajuste-pontos-valor" placeholder="Pontos (ex: -10 ou 20)" required>
-                <input type="text" id="ajuste-pontos-motivo" placeholder="Motivo (ex: Penalidade)" required>
-                <button type="submit" class="btn-principal">Adicionar Ajuste</button>
+    <!-- MODAL PARA ADICIONAR TAREFA (USUÁRIO) -->
+    <div id="modal-adicionar" class="modal-container">
+        <div class="modal-content">
+            <button class="btn-fechar-modal">&times;</button>
+            <h2>Qual missão você cumpriu?</h2>
+            <form id="form-tarefa">
+                <select id="select-tarefa" required>
+                    <option value="" disabled selected>Selecione uma missão...</option>
+                </select>
+                <button type="submit" class="btn-principal">Registrar Conquista</button>
             </form>
         </div>
+    </div>
 
-        <div class="admin-section">
-    <h3>Gerar Relatório PDF</h3>
-    <form id="form-relatorio-pdf">
-        <div class="date-range-picker">
-            <div>
-                <label for="pdf-data-inicio">Data de Início:</label>
-                <input type="date" id="pdf-data-inicio" required>
-            </div>
-            <div>
-                <label for="pdf-data-fim">Data de Fim:</label>
-                <input type="date" id="pdf-data-fim" required>
-            </div>
-        </div>
-        <button type="submit" class="btn-principal">Gerar e Baixar PDF</button>
-    </form>
-</div>
-
-        <!-- Seção de Gerenciamento de Tarefas -->
-        <div class="admin-section">
-            <h3>Gerenciar Missões</h3>
-            <div id="lista-tarefas-admin">
-                <!-- A lista de tarefas para edição será inserida aqui -->
-            </div>
-            <button id="btn-abrir-modal-nova-tarefa" class="btn-secundario">Adicionar Nova Missão</button>
+    <!-- MODAL DE LOGIN DO ADMIN -->
+    <div id="modal-admin-login" class="modal-container">
+        <div class="modal-content">
+            <h2>Acesso Restrito</h2>
+            <form id="form-admin-login">
+                <input type="password" id="admin-password" placeholder="Senha do Administrador" required>
+                <button type="submit" class="btn-principal">Entrar</button>
+                <p id="admin-login-error" class="error-message"></p>
+            </form>
         </div>
     </div>
-</div>
 
-<!-- Modal para Adicionar/Editar Tarefa -->
-<div id="modal-tarefa-editor" class="modal-container">
-    <div class="modal-content">
-        <h2 id="editor-tarefa-titulo">Editar Missão</h2>
-        <form id="form-tarefa-editor">
-            <input type="hidden" id="editor-tarefa-id">
-            <label for="editor-tarefa-nome">Nome:</label>
-            <input type="text" id="editor-tarefa-nome" required>
-            
-            <label for="editor-tarefa-categoria">Categoria:</label>
-            <input type="text" id="editor-tarefa-categoria" required>
-            
-            <label for="editor-tarefa-pontos">Pontos:</label>
-            <input type="number" id="editor-tarefa-pontos" required>
-            
-            <div class="modal-botoes">
-                <button type="submit" class="btn-principal">Salvar Missão</button>
-                <button type="button" id="btn-cancelar-editor" class="btn-secundario">Cancelar</button>
+    <!-- PAINEL PRINCIPAL DO ADMIN -->
+    <div id="painel-admin" class="modal-container">
+        <div class="modal-content">
+            <button class="btn-fechar-modal">&times;</button>
+            <h2>Painel do Administrador</h2>
+
+            <div class="admin-section" id="secao-aprovacao">
+                <h3>Tarefas Pendentes de Aprovação</h3>
+                <div id="lista-aprovacao"></div>
             </div>
-        </form>
+
+            <div class="admin-section">
+                <h3>Ajuste Manual de Pontos</h3>
+                <form id="form-ajuste-pontos">
+                    <input type="number" id="ajuste-pontos-valor" placeholder="Pontos (ex: -50 ou 100)" required>
+                    <input type="text" id="ajuste-pontos-motivo" placeholder="Motivo (ex: Bônus ou Penalidade)" required>
+                    <button type="submit" class="btn-principal">Aplicar Ajuste</button>
+                </form>
+            </div>
+
+            <div class="admin-section">
+                <h3>Gerar Relatório PDF</h3>
+                <form id="form-relatorio-pdf">
+                    <div class="date-range-picker">
+                        <div>
+                            <label for="pdf-data-inicio">Data de Início:</label>
+                            <input type="date" id="pdf-data-inicio" required>
+                        </div>
+                        <div>
+                            <label for="pdf-data-fim">Data de Fim:</label>
+                            <input type="date" id="pdf-data-fim" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-principal">Gerar e Baixar PDF</button>
+                </form>
+            </div>
+
+            <div class="admin-section" id="secao-gerenciar-tarefas">
+                <h3>Gerenciar Tarefas Predefinidas</h3>
+                <div id="lista-tarefas-admin"></div>
+                <button id="btn-abrir-modal-nova-tarefa" class="btn-principal">Adicionar Nova Tarefa</button>
+            </div>
+
+            <div class="admin-section danger-zone">
+                <h3>Zona de Perigo</h3>
+                <p>Use com cuidado. Esta ação não pode ser desfeita.</p>
+                <form id="form-exclusao-segura">
+                    <div class="date-range-picker">
+                        <div>
+                            <label for="apagar-data-inicio">Apagar a partir de:</label>
+                            <input type="date" id="apagar-data-inicio" required>
+                        </div>
+                        <div>
+                            <label for="apagar-data-fim">Apagar até:</label>
+                            <input type="date" id="apagar-data-fim" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-perigo">Apagar Dados do Período</button>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
 
-<script src="app.js"></script>
+    <!-- MODAL EDITOR DE TAREFAS (ADMIN) -->
+    <div id="modal-tarefa-editor" class="modal-container">
+        <div class="modal-content">
+            <button class="btn-fechar-modal">&times;</button>
+            <h2 id="editor-titulo">Editar Tarefa</h2>
+            <form id="form-tarefa-editor">
+                <input type="hidden" id="tarefa-id-editor">
+                <label for="tarefa-nome-editor">Nome da Tarefa:</label>
+                <input type="text" id="tarefa-nome-editor" required>
+                <label for="tarefa-categoria-editor">Categoria:</label>
+                <select id="tarefa-categoria-editor" required>
+                    <option value="Educação">Educação</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Comportamental">Comportamental</option>
+                    <option value="Saúde e Bem-estar">Saúde e Bem-estar</option>
+                    <option value="Financeiro">Financeiro</option>
+                </select>
+                <label for="tarefa-pontos-editor">Pontos:</label>
+                <input type="number" id="tarefa-pontos-editor" required>
+                <button type="submit" class="btn-principal">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
 
+    <!-- SCRIPTS (SEMPRE NO FINAL) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- LINHA CORRIGIDA E VALIDADA -->
+    <script src="app.js"></script>
+
+</body>
 </html>
